@@ -8,7 +8,7 @@ import utils
 
 
 def _exec_crf_test(input_text):
-    with tempfile.NamedTemporaryFile() as input_file:
+    with tempfile.NamedTemporaryFile(mode='w') as input_file:
         input_file.write(utils.export_data(input_text))
         input_file.flush()
         return check_output(
@@ -22,4 +22,4 @@ def _convert_crf_output_to_json(crf_output):
 
 def parse(ingredients):
     crf_output = _exec_crf_test(ingredients)
-    return _convert_crf_output_to_json(crf_output.split('\n'))
+    return _convert_crf_output_to_json(crf_output.decode().split('\n'))

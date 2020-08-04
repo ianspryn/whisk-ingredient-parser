@@ -1,9 +1,9 @@
 FROM mtlynch/crfpp
 
 RUN apt-get update -y && \
-    apt-get install -y git python2.7 python-pip
+    apt-get install -y git python3 python3-pip
 
-RUN pip install Flask gunicorn
+RUN pip3 install Flask gunicorn
 
 ADD . /app
 WORKDIR /app

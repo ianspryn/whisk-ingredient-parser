@@ -72,7 +72,7 @@ def getFeatures(token, index, tokens):
     """
     Returns a list of features for a given token.
     """
-    length = len(tokens)
+    length = len(list(tokens))
 
     return [("I%s" % index), ("L%s" % lengthGroup(length)),
             ("Yes" if isCapitalized(token) else "No") + "CAP",
@@ -268,7 +268,7 @@ def import_data(lines):
     # reassemble the output into a list of dicts.
     output = [
         dict([(k, smartJoin(tokens))
-              for k, tokens in ingredient.iteritems()])
+              for k, tokens in ingredient.items()])
         for ingredient in data
         if len(ingredient)
     ]
@@ -290,8 +290,10 @@ def export_data(lines):
     for line in lines:
         line_clean = re.sub('<[^<]+?>', '', line)
         tokens = tokenizer.tokenize(line_clean)
+        # Need a copy, otherwise somehow it gets used up
+        tokens_copy = tokenizer.tokenize(line_clean)
 
-        for i, token in enumerate(tokens):
+        for i, token in enumerate(tokens_copy):
             features = getFeatures(token, i + 1, tokens)
             output.append(joinLine([token] + features))
         output.append('')
