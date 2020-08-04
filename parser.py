@@ -20,7 +20,6 @@ def _convert_crf_output_to_json(crf_output):
     return json.dumps(utils.import_data(crf_output), indent=2, sort_keys=True)
 
 
-def parse_ingredients(obj):
-    ingredients = obj['ingredients']
+def parse(ingredients):
     crf_output = _exec_crf_test(ingredients)
-    print(_convert_crf_output_to_json(crf_output.split('\n')))
+    return _convert_crf_output_to_json(crf_output.split('\n'))
