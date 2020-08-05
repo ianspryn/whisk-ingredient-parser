@@ -22,29 +22,34 @@ And tag it
 
 - `docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]`
 
-- Example: `docker tag a1b2c3d4e5f6 ianspryn/ingredient-parser`
+- Example: `docker tag a1b2c3d4e5f6 ianspryn/whisk-ingredient-parser`
 
 ## Deploy to Cloud Run
 
 See also: https://cloud.google.com/container-registry/docs/pushing-and-pulling
 
-Run `docker pull ianspryn/ingredient-parser`
+Run `docker pull ianspryn/whisk-ingredient-parser`
 
 Tag the local image with the registry name using the command:
 
 - `docker tag [SOURCE_IMAGE] [HOSTNAME]/[PROJECT-ID]/[IMAGE]`
 
- - Example: `docker tag ianspryn/ingredient-parser gcr.io/project-1a2b3/ianspryn/ingredient-parser`
+ - Example: `docker tag ianspryn/whisk-ingredient-parser gcr.io/project-1a2b3/ianspryn/whisk-ingredient-parser`
 
 Push it to Cloud Run. Make sure you're in the repository directory
 
 - `gcloud builds submit --tag [HOSTNAME]/[PROJECT-ID]/[IMAGE]`
 
-- Example: `gcloud builds submit --tag gcr.io/project-1a2b3/ingredient-parser`
+- Example: `gcloud builds submit --tag gcr.io/project-1a2b3/whisk-ingredient-parser`
+
+Run it
+
+- `gcloud run deploy --image [HOSTNAME]/[PROJECT-ID]/[IMAGE]
+- Example: 'gcloud run deploy --image gcr.io/project-1a2b3/whisk-ingredient-parser
 
 ## Testing locally
 
-`docker run -p 9090:8080 -e PORT=8080 ianspryn/ingredient-parser`
+`docker run -p 9090:8080 -e PORT=8080 ianspryn/whisk-ingredient-parser`
 
 Open Postman and point it to `http://localhost:9090/parse-ingredients` with a body of something like the following:
 
