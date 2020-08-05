@@ -36,8 +36,22 @@ Tag the local image with the registry name using the command:
 
  - Example: `docker tag ianspryn/ingredient-parser gcr.io/project-1a2b3/ianspryn/ingredient-parser`
 
-Push it to Cloud Run
+Push it to Cloud Run. Make sure you're in the repository directory
 
 - `gcloud builds submit --tag [HOSTNAME]/[PROJECT-ID]/[IMAGE]`
 
 - Example: `gcloud builds submit --tag gcr.io/project-1a2b3/ingredient-parser`
+
+## Testing locally
+
+`docker run -p 9090:8080 -e PORT=8080 ianspryn/ingredient-parser`
+
+Open Postman and point it to `http://localhost:9090/parse-ingredients` with a body of something like the following:
+
+```
+{
+        "ingredients": [
+                "1 cup of flour",
+                "3 1/2 teaspoons of sugar"
+        ]
+}
